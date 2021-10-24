@@ -1,0 +1,34 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: gia1234
+    url: jdbc:mysql://localhost:3306/car
+  jackson:
+    locale: vi_VN
+    time-zone: Asia/Ho_Chi_Minh
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        globally_quoted_identifiers: true
+        format_sql: true
+        dialect=org:
+          hibernate:
+            dialect:
+              MySQL5Dialect:
+  messages:
+    basename: i18n/messages
+#  spring.jpa.generate-ddl=true
+#  spring.jpa.show-sql=true
+#  spring.jpa.hibernate.ddl-auto= none
+#  spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+jwt:
+  access-secret-key: "jwso_access_secret_key"
+  refresh-secret-key: "jwso_refresh_secret_key"
+cookie:
+  domain: "localhost"
+  secure: false
+

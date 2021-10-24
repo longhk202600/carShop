@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+  <meta charset="utf-8">
+  <title>edit showroom</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="background-color: #E6E0F8">
+<form action="#" th:action="@{/save-showroom}" th:object="${showroom}" method="post" enctype="multipart/form-data">
+  <div class="container" style="background-color:white; border-radius: 10px;">
+    <div style="margin-top: 30px;" class="row">
+      <div  class="col-sm-4">
+        <div style="margin-top: 10px;" class="khoi">
+          <label>Chọn 1 ảnh showroom của bạn</label>
+          <input class="form-control-file border" id="logoShowroom" type="file" name="logoShowroom"
+                 accept="image/png, image/jpg, image/jpeg">
+        </div>
+        <br>
+        <img height="300px" width="350px" alt="anh showroom" id="image">
+      </div>
+      <div class="col-sm-8">
+        <div style="margin-top:20px;" class="khoi">
+          <div class="form-row" style="margin-bottom: 15px;" >
+            <div class="col-sm-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Tên Showroom</span>
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" required="true" th:field="*{name}">
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom: 15px;" >
+            <div class="col-sm-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Địa chỉ</span>
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="addressShowroom"
+                     th:field="*{address}"
+                     required="true">
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom: 15px;" >
+            <div class="col-sm-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Điện thoại</span>
+              </div>
+            </div>
+            <div class="col-sm-10" >
+              <input type="text" class="form-control" id="phone"
+                     th:field="*{phone}"
+                     required="true"
+                     pattern="^(09|03|07|08|05)+([0-9]{8})$"
+                     title="vui lòng nhập đúng đầu số điện thoại, độ dài 10 số, không có chữ">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+      </div>
+      <div class="col-sm-3">
+        <a class="btn btn-danger" th:href="@{/home} ">Hủy bỏ</a>
+        <input type="submit" class="btn btn-primary" value="Đăng kí">
+      </div>
+    </div>
+  </div>
+  </div>
+</form>
+<script>
+    document.getElementById("logoShowroom").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+    };
+</script>
+</body>
+</html>

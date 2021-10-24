@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Order </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+
+    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/listOrder.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link th:src="@{/js/order.js}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+
+    .title{
+    margin-left: 0px;
+    color:black;
+    }
+</style>
+<div th:include="header :: copy"></div>
+<div class="codepen-container" style="height:600px">
+    <div class="content-container">
+        <div class="left-container">
+            <div class="triangle-topleft">
+                <div class="back-arrow" id="buy-toaster"></div>
+            </div>
+            <div class="product-image--container" style="height:350px">
+                <img class="product-image--featured" id="featured"
+                     th:src="${car.imagepath}" alt="toaster"/>
+                <ul class="product-image--list" >
+                    <li th:each="item:${listImage}" class="item-selected"><img th:src="${item.image}"
+                                                   class="product-image--item"/></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-container">
+            <div>
+                <h4 class="title" th:text="${car.name}"></h4>
+                <span >ID xe</span>
+                <span id="carID" th:text="${car.id}"></span>
+            </div>
+            <span>
+        <p>Price:
+          <span class="emphasize"th:text="${price}" ></span>
+
+        </p>
+      </span>
+            <div>
+                <h4 class="title">Product Description</h4>
+                <div class="subtitle-container">
+                    <span>Kiểu Xe</span>
+                    <span th:text="${car.type}"></span>
+                    <span>|</span>
+                    <br>
+                    <span>Color: </span>
+                    <span th:text="${car.color}"></span>
+                    <span ></span>
+                </div>
+                <p th:text="${car.information}">
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr>
+<!--style="display: none"-->
+<div id="dvPassport" class="container text-center" >
+    <div class="input-group mb-3" style="display:flex">
+        <input type="text" class="form-control" id="money"  style="width:70%" placeholder="'Nhập số tiền bán được xe" aria-label="Recipient's username" required aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">Triệu VND</span>
+        </div>
+    </div>
+</div>
+<div class="container" style="width:100%">
+    <h2>Người đang đặt xe </h2>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="column" th:each="item:${listUser}">
+            <div class="card text-center">
+                <img src="image/img1.jpg" alt="Jane" style="width:75%">
+                <div class="container" style="width:100%">
+                    <h2 th:text="${item.name}"></h2>
+                    <p class="text-center" th:text="${item.phone}"></p>
+                    <p th:text="${item.email}"></p>
+                    <p th:text="${item.address}"></p>
+                    <p>
+                        <button class="button">Contact</button>
+                    </p> <p>
+                    <button class="button" value="Yes" data-toggle="modal" th:onclick="ShowHideDiv(this,[[${item.id}]])" data-target="#exampleModal">Xác nhận đã bán </button>
+                </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<br>
+<div th:include="footer :: copy"></div>
+<script src="js/order.js"></script>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

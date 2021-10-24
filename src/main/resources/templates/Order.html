@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="carOrder">
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <script type="text/javascript" th:src="@{/js/customOrder.js}"></script>
+</head>
+<body>
+<div class="content-container">
+    <table id="table-order" class="table table-bordered" style="width: 100%;">
+        <thead class="table-primary">
+        <tr style=" background-color: #58FAF4;">
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Tên xe</th>
+            <th scope="col">Hãng xe</th>
+            <th scope="col">Kiểu xe</th>
+            <th scope="col">Màu sắc</th>
+            <th scope="col">Số chố ngồi</th>
+            <th scope="col">Tình trạng</th>
+            <th scope="col">Giá nhỏ nhất</th>
+            <th scope="col">Giá lớn nhất</th>
+            <th scope="col" width="300px">Thông tin chi tiết</th>
+            <th scope="col" width="110px">Chức năng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${carOrder}">
+            <td><img th:src="${car.imagePath}" alt="ảnh xe" height="150px" width="150px"></td>
+            <td th:text="${car.name}"></td>
+            <td th:text="${car.companyName}"></td>
+            <td th:text="${car.type}"></td>
+            <td th:text="${car.color}"></td>
+            <td th:text="${car.seats}"></td>
+            <td>
+                <div th:switch="${car.usage}">
+                    <div th:case="true">Mới</div>
+                    <div th:case="false">Cũ</div>
+                </div>
+            </td>
+            <td th:text="${car.priceFrom}"></td>
+            <td th:text="${car.priceTo}"></td>
+            <td th:text="${car.information}"></td>
+            <td>
+                <a th:href="@{'/listorder?id='+${car.id}}" class="btn btn-warning">
+                    Xem người đặt
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item page-order">
+                <a class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item page-order" th:each="page : ${totalPageCarOrder}">
+                <a class="page-link"  th:text="${page + 1}"></a>
+            </li>
+            <li class="page-item page-order">
+                <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

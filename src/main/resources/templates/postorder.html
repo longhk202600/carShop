@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <title>Post Oder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="" th:onload="Active([[${active}]])">
+<div th:include="header :: copy"></div>
+<form th:action="@{/post-order}" th:object="${order}" method="post" enctype="multipart/form-data">
+    <div class="container" style="background-color:white; border-radius: 10px;">
+        <div style="margin-top: 30px;" class="row">
+            <div  class="col-sm-4">
+                <div style="margin-top: 10px;" class="khoi">
+                    <label>Chọn 1 ảnh minh họa</label>
+                    <input class="form-control-file border" id="imageCar" type="file" name="imageCar" required="true" accept="image/png, image/jpg, image/jpeg">
+                </div>
+                <br>
+                <img height="300px" width="350px" src="/images/anhminhhoa1.jpeg" id="image">
+            </div>
+            <div class="col-sm-8">
+                <div style="margin-top:20px;" class="khoi">
+                    <div class="form-row" style="margin-bottom: 15px;" >
+                        <div class="col-sm-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Bạn cần mua gì</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" required="true" th:field="*{carDescription}">
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-bottom: 15px;" >
+                        <div class="col-sm-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Giá tiền</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="priceFrom"
+                                   th:field="*{priceFrom}" placeholder="từ"
+                                   required="true">
+                        </div>
+                        <div class="col-sm-1" id="moneyFrom" style="margin-top:8px;">
+                            Triệu
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="priceTo"
+                                   th:field="*{priceTo}" placeholder="đến"
+                                   required="true">
+                        </div>
+                        <div class="col-sm-1" id="moneyTo" style="margin-top:8px;">
+                            Triệu
+                        </div>
+                        <div class="col-sm-2">
+                            <p id="error" style="color: red;"></p>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-bottom: 15px;" >
+                        <div class="col-sm-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Số chỗ ngồi</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" >
+                            <select class="form-control" th:field="*{seats}">
+                                <option value="2" selected="true">2</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="7">7</option>
+                                <option value="16">16</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-bottom: 15px;" >
+                        <div class="col-sm-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Tình trạng</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control" th:field="*{carUsage}">
+                                <option value="1" selected="true">Mới</option>
+                                <option value="0">Cũ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Mô tả thêm</label>
+                        <textarea class="form-control" rows="5" id="comment" th:field="*{moreDescription}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+
+            </div>
+            <div class="col-sm-2">
+                <input type="button" class="btn btn-danger" value="Hủy bỏ">
+                <input type="submit" class="btn btn-primary" value="Đăng">
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+<hr>
+<div th:include="footer :: copy"></div>
+<script>
+            document.getElementById("imageCar").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+    };
+    //kiem tra giá tiền
+    document.getElementById("priceFrom").oninput = function () {
+        var numberPriceFrom = document.getElementById("priceFrom").value;
+        var numberPriceTo = document.getElementById("priceTo").value;
+        var error = document.getElementById("error");
+        if(numberPriceFrom.length>=4){
+        var newPrice =numberPriceFrom.substring(numberPriceFrom.length-3,0)+" tỷ "+numberPriceFrom.substring(numberPriceFrom.length,numberPriceFrom.length-3)+"Triệu"
+          document.getElementById("moneyFrom").innerHTML = newPrice;
+        }else{
+          document.getElementById("moneyFrom").innerHTML = numberPriceFrom+"Triệu";
+        }
+    }
+
+    document.getElementById("priceTo").oninput = function () {
+        var numberPriceFrom = document.getElementById("priceFrom").value;
+        var numberPriceTo = document.getElementById("priceTo").value;
+        var error = document.getElementById("error");
+         if(numberPriceTo.length>=4){
+           var newPrice =numberPriceTo.substring(numberPriceTo.length-3,0)+" tỷ "+numberPriceTo.substring(numberPriceTo.length,numberPriceTo.length-3)+"Triệu"
+           document.getElementById("moneyTo").innerHTML = newPrice
+        }else{
+          document.getElementById("moneyTo").innerHTML = numberPriceTo+"Triệu";
+        }
+
+        if(numberPriceFrom >= numberPriceTo){
+            error.innerHTML = '(Giá tiền không hợp lệ)';
+        }else{
+        error.style.color = 'blue';
+        error.innerHTML = '(Giá tiền hợp lệ)';
+        }
+    }
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

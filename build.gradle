@@ -1,0 +1,69 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'codluck.training'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+group = 'com.example.Codluck'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-security:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
+
+	implementation 'org.springframework.boot:spring-boot-starter-websocket:2.5.4'
+	implementation 'org.webjars:webjars-locator-core:0.48'
+	implementation 'org.webjars:sockjs-client:1.5.1'
+	implementation 'org.webjars:stomp-websocket:2.3.4'
+	implementation 'org.webjars:bootstrap:5.1.0'
+	implementation 'org.webjars:jquery:3.6.0'
+	implementation 'de.vinado.spring:dkim-javamail:1.2.1'
+	implementation 'de.vinado.boot:spring-boot-autoconfigure-dkim-javamail:1.2.1'
+	implementation 'de.vinado.boot:spring-boot-starter-dkim-javamail:1.2.1'
+	implementation 'de.vinado.boot:spring-boot-dkim-javamail:1.2.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-mail:2.5.4'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-mail:2.5.4'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.5.4'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+
+	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+
+	//lombok
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat:2.5.4'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+	testImplementation 'org.springframework.security:spring-security-test:5.5.1'
+
+
+}
+
+test {
+	useJUnitPlatform()
+}

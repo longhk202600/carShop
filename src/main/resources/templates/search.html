@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="copy">
+
+
+    <div class="container">
+        <div class="search">
+            <form class="md" th:action="@{/search}" method="post">
+                <div class="row">
+                    <label>Tìm kiếm theo</label>
+                    <select class="form-control select2" name="search">
+                        <option value="name">Tên</option>
+                        <option value="price">Giá</option>
+                        <option value="company">Hãng xe</option>
+                        <option value="color" >Màu xe</option>
+                        <option>Cycle</option>
+                        <option>Horse</option>
+                    </select>
+
+                </div>
+                <div class="d-flex justify-content-center h-100">
+                    <div class="searchbar">
+                        <input class="search_input" type="text" name="input" placeholder="Search..." style="width:100px">
+                        <a  class="search_icon"><button class="btnsearch" type="submit"><i class="fa fa-search"></i></button></a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+
+</div>
+</body>
+</html>

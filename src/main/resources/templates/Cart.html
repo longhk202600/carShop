@@ -1,0 +1,105 @@
+<!doctype html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Website menu 06</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <!--	<link  th:href="@{/static/css/header.css}" type="stylesheet" />-->
+    <!--	<link th:src="@{/js/main.js}" rel="stylesheet"/>-->
+    <!--	<script src="../static/js/main.js" th:src="@{/js/main.js}">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<!--onload="loadData()"-->
+<body  th:onload="Active([[${active}]])">
+<style>
+.status{
+color:black;
+font-size :15px;
+text-decoration-line:line-through;
+}
+</style>
+<div th:include="header :: copy"></div>
+<h1 style="color: red" th:text="${message}"></h1>
+<div th:include="search :: copy"></div>
+<hr>
+<br /><br />
+<div class="container">
+    <h2>
+        Giỏ Hàng
+    </h2>
+</div>
+
+<div class="container">
+    <div class="row" id="contain">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3  prodcut-item" th:each="item:${session.cart}">
+            <div class="ibox" >
+                <div class="ibox-content product-box">
+                    <img th:src="${item.imagepath}" height="250px" width="220px" alt="">
+                    <div class="product-desc"><span class="product-price" th:text="${item.priceFrom}" >
+							</span>
+                        <br>
+                        <small class="text-muted">Mercedes </small>
+                        <a href="#" class="product-name" th:text="${item.name}"></a>
+                        <div class="small m-t-xs" th:text="${item.information}" >
+                        </div>
+                        <div class="m-t text-righ">
+                            <a th:href="@{'/car-order?id='+${item.id}}" class="btn btn-xs btn-outline btn-primary">Đặt Mua <i class="fa fa-long-arrow-right"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item slider-->
+
+<div class="container">
+    <h2>Danh sách xe đang order</h2>
+    <div class="row" id="contain">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3  prodcut-item" th:each="item:${listOrder}">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+                    <img th:src="${item.imagepath}" height="250px" width="220px" alt="">
+                    <div class="product-desc"><span class="product-price" th:text="${item.priceFrom}">
+							</span>
+                        <br>
+                        <small class="text-muted">Mercedes </small>
+                        <a href="#" class="product-name" th:text="${item.name}"></a>
+                        <div class="small m-t-xs" th:text="${item.information}">
+                        </div>
+                        <div class="small m-t-xsv status" th:if="${item.statusCar}==False" >
+                            Xe đã bán
+                        </div>
+                        <div class="small m-t-xs " th:if="${item.statusCar}==True"  >
+                            Đang chờ xác nhận
+                        </div>
+
+                        <div class="m-t text-righ">
+                            <a th:if="${item.statusCar}==False" th:href="@{'/car-deleteOrder?id='+${item.id}}" class="btn btn-xs btn-outline btn-primary">Xóa Order <i class="fa fa-long-arrow-right"></i> </a>
+                            <a th:if="${item.statusCar}==True" th:href="@{'/car-deleteOrder?id='+${item.id}}" class="btn btn-xs btn-outline btn-primary">Hủy Order <i class="fa fa-long-arrow-right"></i> </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div th:include="footer :: copy"></div>
+
+
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>

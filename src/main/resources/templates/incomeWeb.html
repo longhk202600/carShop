@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Website menu 06</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <!--	<link  th:href="@{/static/css/header.css}" type="stylesheet" />-->
+    <!--	<link th:src="@{/js/main.js}" rel="stylesheet"/>-->
+    <!--	<script src="../static/js/main.js" th:src="@{/js/main.js}">-->
+    <link th:src="@{/js/main.js}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+</head>
+
+
+<body onload="AddActive()">
+<style>
+		.infor-partner {
+			display: flex;
+		}
+
+		.body-dow {
+			margin-top: 300px;
+		}
+
+		.infor-partner-item {
+			width: 33%;
+		}
+
+		.item img {
+			background-color: black;
+		}
+
+		.fade ul {
+			border: 1px solid black;
+			margin-bottom: 30px;
+		}
+
+		.fade ul li {
+			border-bottom: 1px solid black;
+			list-style: none;
+			height: 30px;
+			text-align: left;
+
+		}
+
+		.certified ul li {
+			border: none !important;
+			width: 150px;
+
+		}
+
+
+
+</style>
+<div th:include="header :: copy"></div>
+<style>
+        body {
+            /* background: linear-gradient(to right, #c04848, #480048); */
+            min-height: 100vh
+        }
+        /* .py-5{
+margin-top: 150px;
+} */
+
+        .text-gray {
+            color: #aaa
+        }
+
+        img {
+            height: 170px;
+            width: 140px
+        }
+
+        .left-Admin {
+            width: 100%;
+            height: 100%;
+        }
+
+        .list-group-item-action {
+            width: 250px;
+            margin-top: 20px;
+        }
+
+        .list-group-item-action:hover {
+            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+        }
+
+        .list-group i {
+            margin-left: 25px;
+            font-size: 20px;
+        }
+
+        .py-5 {
+            padding-top: 1px !important;
+        }
+
+        .list-group-item-action:first-child {
+            width: 250px;
+            margin-top: 1px !important;
+        }
+    </style>
+
+<div class="container">
+    <canvas id="myChart" style="max-width: 500px;"></canvas>
+    <div class="col-md-5">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+<input id="list" type="hidden"  th:value="${list}"/>
+
+<!--footer starts from here-->
+<div th:include="footer :: copy"></div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+
+<script src="js/main.js"></script>
+
+</body>
+
+<script th:inline="javascript">
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var solieu =[[${list}]];
+    console.log(solieu[0]);
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["tháng 1", "tháng 2", "tháng 3", "tháng 4", "tháng 5", "tháng 6","tháng 7", "tháng 8", "tháng 9", "tháng 10", "tháng 11", "tháng 12"],
+            datasets: [{
+                label: '# triệu',
+                data: solieu,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                   'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+</html>

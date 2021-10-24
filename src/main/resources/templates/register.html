@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đăng kí</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/css/styleregister.css">
+</head>
+<body style="background-image: linear-gradient(to right, #2E9AFE , #58FAF4);">
+
+<div class="main">
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <form  th:action="@{/register}" th:object="${user}" method="post" class="signup-form">
+                    <h2 class="form-title">Đăng kí</h2>
+                    <div class="form-group">
+                        <input required type="text" class="form-input" th:field="*{name}" placeholder="Họ và tên">
+                    </div>
+                    <div class="form-group">
+                        <input type="email"
+                               required="true"
+                               pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                               class="form-input"
+                               th:field="*{email}" placeholder="Email">
+                    </div>
+                    <p th:text="${emailmessage}" style="color: red;"></p>
+                    <div class="form-group">
+                        <input required type="text" class="form-input" th:field="*{phone}"
+                               pattern="^(09|03|07|08|05)+([0-9]{8})$"
+                               title="vui lòng nhập đúng đầu số điện thoại, độ dài 10 số, không có chữ"
+                               placeholder="Số điện thoại">
+                    </div>
+                    <div class="form-group ">
+                        <input required type="text" class="form-input" id="address" th:field="*{address}"
+                               placeholder="Thành phố hiện tại">
+                    </div>
+                    <div class="form-group">
+                        <label>Bạn là:</label>
+                        <input type="radio" class="radio1" value="2" checked="checked" th:field="*{roleId}"> Người mua
+                        <input type="radio" class="radio1" value="3" th:field="*{roleId}"> Người bán
+                    </div>
+                    <div class="form-group">
+                        <input required type="text" class="form-input" name="username"
+                               pattern="^[a-zA-Z0-9]{4,30}$"
+                               title="Tài khoản chứa từ 4 - 30 kí tự và chỉ chứa chữ và số"
+                               placeholder="Tài khoản">
+                    </div>
+                    <p th:text="${message}" style="color: red;"></p>
+                    <div class="form-group">
+                        <input  id="password" required type="password" class="form-input" name="password"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+                                title="Mật khẩu chứa í nhất 8 kí tự, ít nhất 1 chữ in hoa, 1 chữ thường, 1 số"
+                                placeholder="Mật khẩu">
+                    </div>
+                    <div class="form-group">
+                        <input id="rePassword" required type="password" class="form-input" name="rePassword"
+                               placeholder="Nhập lại mật khẩu">
+                    </div>
+                    <p id="errorRepassword"></p>
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Đăng kí"/>
+                    </div>
+                </form>
+                <p class="loginhere">
+                    Bạn đã có tài khoản <a th:href="@{/login}" class="loginhere-link">Đăng nhập</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+<script src="/js/main.js"></script>
+<script src="/js/register.js"></script>
+</body>
+</html>

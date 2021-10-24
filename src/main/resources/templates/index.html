@@ -1,0 +1,273 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Website menu 06</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+
+    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <!--	<link  th:href="@{/static/css/header.css}" type="stylesheet" />-->
+    <link th:src="@{/js/main.js}" rel="stylesheet"/>
+    <!--	<script src="../static/js/main.js" th:src="@{/js/main.js}">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div class="elfsight-app-004b914e-a65a-41e2-ba47-bbd212fa3606"></div>
+</head>
+
+<!--onload="loadData()"-->
+<body th:onload="Active([[${active}]])">
+<style>
+
+</style>
+<div th:include="header :: copy"></div>
+
+<div class="container">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="1500">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+
+            <div class="item active">
+                <img src="/image/1-57.jpg" alt="Los Angeles" style="width:100%;">
+                <div class="carousel-caption">
+                    <h3>Mercedes</h3>
+                    <p>LA is always so much fun!</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="/image/hinh-anh-sieu-xe-senna-doi-2019-duoc-ban-tai-thi-truong-australia-nguon-carscoops.jpg"
+                     alt="Chicago" style="width:100%;">
+                <div class="carousel-caption">
+                    <h3>Lamborghini Sian</h3>
+                    <p>Thank you, Chicago!</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="/image/lexus-lx570-super-sport-2021-gioithieuxe-vn-03.jpg" alt="New York"
+                     style="width:100%;">
+                <div class="carousel-caption">
+                    <h3>Lexus LX 570</h3>
+                    <p>We love the Big Apple!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<hr>
+<h1 style="color: red" th:text="${message}"></h1>
+<div th:include="search :: copy"></div>
+<div class="title">
+    <h2 th:Text="${title}"></h2>
+
+    <div class="product-soft d-none d-lg-block col-lg-6 text-lg-right">
+        <form th:action="@{/sort}" method="post">
+			<span class="product-soft-span position-relative">
+<!--onchange="location=this.value"-->
+                    <select class="product-soft-select pointer" name="sort">
+                        <option selected="" value="priceDESC">Sắp Xếp Theo</option>
+                        <option value="priceDESC">
+						Giá: Giảm dần</option>
+					<option value="priceASC">
+						Giá: Tăng dần</option>
+					<option value="nameDESC">
+						Tên: A - Z</option>
+					<option value="">
+						Tên: Z - A</option>
+					<option value="/ao-nam-pc94119.html?show=idAsc">
+						Cũ nhất</option>
+					<option value="/ao-nam-pc94119.html?show=idDesc">
+						Mới nhất</option>
+					<option value="">
+						Bán chạy nhất</option>
+				</select>
+
+            <button type="submit"><i class="fa fa-angle-double-down"></i></button>
+			</span>
+        </form>
+    </div>
+
+</div>
+<div class="container">
+    <div class="row" id="contain">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3  prodcut-item" th:each="item:${list}">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+                    <img th:src="${item.imagepath}" height="250px" width="220px" alt="">
+                    <div class="product-desc"><span class="product-price" th:text="${item.priceFrom}">
+
+							</span>
+                        <br>
+
+                        <small class="text-muted">Mercedes </small>
+                        <a href="#" class="product-name" th:text="${item.name}"></a>
+
+                        <div class="small m-t-xs">
+                            Mercedes E200 nhập khẩu nguyên chiếc từ đức
+                        </div>
+                        <div class="m-t text-righ">
+
+                            <a th:href="@{'/detailCar?id='+${item.id}}" class="btn btn-xs btn-outline btn-primary">Xem
+                                thêm <i
+                                        class="fa fa-long-arrow-right"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" id="slider-text">
+        <div class="col-md-6">
+            <h2>​Mẫu xe bán chạy nhất</h2>
+        </div>
+    </div>
+</div>
+<!-- Item slider-->
+<div class="container-fluid" style="height: 290px;">
+
+    <div class="row" style="height: 290px;">
+        <div class="col-xs-12 col-sm-12 col-md-12" style="height: 290px;">
+            <div class="carousel carousel-showmanymoveone slide" id="itemslider" data-interval="1500">
+                <div class="carousel-inner" style="height: 290px;">
+                    <div class="item active">
+                        <div class="col-xs-12 col-sm-6 col-md-2">
+                            <a href="#"><img style="height: 230px; width:170px;" src="/image/laboslide.jpg"
+                                             class="img-responsive center-block"></a>
+                            <h4 class="text-center">MAYORAL SUKNJA</h4>
+                            <h5 class="text-center">200,00 TK</h5>
+                        </div>
+                    </div>
+                    <div class="item" style="border: 1px solid black;">
+                        <div class="col-xs-12 col-sm-6 col-md-2">
+                            <a href="#"><img style="height: 230px; width:190px;"
+                                             src="/image/hinh-anh-sieu-xe-senna-doi-2019-duoc-ban-tai-thi-truong-australia-nguon-carscoops.jpg"
+                                             class="img-responsive center-block"></a>
+                            <h4 class="text-center">Mercedes E200</h4>
+                            <h5 class="text-center">$200,000 </h5>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-xs-12 col-sm-6 col-md-2">
+                            <a href="#"><img style="height: 230px; width:190px;" src="/image/mec.jpg"
+                                             class="img-responsive center-block"></a>
+                            <h4 class="text-center">Mercedes E200</h4>
+                            <h5 class="text-center">$200,000 </h5>
+                        </div>
+                    </div>
+                    <div class="item" style="border: 1px solid black;">
+                        <div class="col-xs-12 col-sm-6 col-md-2">
+                            <a href="#"><img style="height: 230px; width:190px;" src="/image/mec1.jpg"
+                                             class="img-responsive center-block"></a>
+                            <h4 class="text-center">Mercedes E200</h4>
+                            <h5 class="text-center">$200,000 </h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="slider-control">
+                    <a class="left carousel-control" href="#itemslider" data-slide="prev"><img height="40px"
+                                                                                               width="40px"
+                                                                                               src="https://cdn0.iconfinder.com/data/icons/website-kit-2/512/icon_402-512.png"
+                                                                                               alt="Left"
+                                                                                               class="img-responsive"></a>
+                    <a class="right carousel-control" href="#itemslider" data-slide="next"><img
+                            src="http://pixsector.com/cache/81183b13/avcc910c4ee5888b858fe.png" alt="Right"
+                            class="img-responsive"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Item slider end-->
+<br/><br/>
+<div class="container">
+    <h2>
+        Thương hiệu
+    </h2>
+
+</div>
+<div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row" id="logo">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 logo-company" th:each="item:${listTop5}">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions"><img th:src="${item.logo}" class="card-img img-fluid" width="100px"
+                                                       height="400px" alt=""></div>
+                </div>
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2"><a href="#" class="text-default mb-2" data-abc="true"
+                                                                 th:text="${item.name_Company}"></a></h6>
+                    </div>
+                    <div><i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i></div>
+                    <div class="text-muted mb-3">34 reviews
+                    </div>
+                    <button type="button" class="btn bg-cart"><a
+                            th:href="@{'/getCompany?id='+${item.id}+'&name='+${item.name_Company}}"><i
+                            class="fa fa-cart-plus mr-2"></i>Xem Các Sản Phẩm</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+<hr>
+<br>
+<div th:include="footer :: copy"></div>
+
+
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+<!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"-->
+<!--        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"-->
+<!--        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"-->
+<!--        crossorigin="anonymous"></script>-->
+<script src="js/main.js"></script>
+
+
+</body>
+</html>

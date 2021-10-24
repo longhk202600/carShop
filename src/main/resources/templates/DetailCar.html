@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Website menu 06</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <link th:src="@{/js/main.js}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body onload="AddActive()">
+<style>
+		.infor-partner {
+			display: flex;
+		}
+
+		.body-dow {
+			margin-top: 300px;
+		}
+
+		.infor-partner-item {
+			width: 33%;
+		}
+
+		.item img {
+			background-color: black;
+		}
+
+		.fade ul {
+			margin-bottom: 30px;
+		}
+
+		.fade ul li {
+			border-bottom: 1px solid black;
+			list-style: none;
+			height: 30px;
+			text-align: left;
+
+		}
+
+		.certified ul li {
+			border: none !important;
+			width: 150px;
+
+		}
+</style>
+<div th:include="header :: copy"></div>
+
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <!-- product -->
+    <div class="product-content product-wrap clearfix product-deatil">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 col-xs-12">
+                <div class="product-image">
+                    <div id="myCarousel-2" class="carousel slide" data-interval="1500">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel-2" data-slide-to="0" class=""></li>
+                            <li data-target="#myCarousel-2" data-slide-to="1" class="active"></li>
+                            <li data-target="#myCarousel-2" data-slide-to="2" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <!-- Slide 1 -->
+                            <div class="item" th:each="item:${listImage}">
+                                <img th:src="${item.image}"
+                                     class="img-responsive" style="width:650px;height:400px" alt=""/>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel-2" data-slide="prev"> <span
+                                class="glyphicon glyphicon-chevron-left"></span> </a>
+                        <a class="right carousel-control" href="#myCarousel-2" data-slide="next"> <span
+                                class="glyphicon glyphicon-chevron-right"></span> </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-md-offset-1 col-sm-12 col-xs-12">
+                <h2 class="name" th:text="${Car.name} ">
+
+                    <small>Product by <a href="javascript:void(0);">Mercedes</a></small>
+
+                </h2>
+                <hr/>
+
+                <h3 class="" th:text="${price} ">
+
+                </h3>
+                <small style="color:Blue">Tùy bản</small>
+
+                <hr/>
+                <div class="description description-tabs">
+                    <ul id="myTab" class="nav nav-pills">
+                        <li class="active"><a href="#more-information" data-toggle="tab" class="no-margin">Thông tin
+                            về xe </a></li>
+                        <li class=""><a href="#specifications" data-toggle="tab">Thông tin về Showroom</a></li>
+
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="more-information">
+                            <p>
+                            <div style="margin-top: 10px;  background-color: white; border-radius: 10px;" class="row">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td>Số chỗ ngồi</td>
+                                        <td th:text="${Car.seats}" style="margin-left: 10px;"></td>
+                                    </tr>
+                                    <td>Dòng xe</td>
+                                    <td th:text="${Car.type}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Màu sắc</td>
+                                        <td th:text="${Car.color}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tình trạng</td>
+                                        <td>
+                                            <div th:switch="${Car.usage}">
+                                                <div th:case="TRUE">Mới</div>
+                                                <div th:case="FALSE">Cũ</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thông tin chi tiết</td>
+                                        <td th:text="${Car.information}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="specifications">
+                            <th:block th:if="${Showroom}">
+                                <br/>
+                                <dl class="infor-partner">
+                                    <div class="infor-partner-item">
+                                        <dt>Tên ShowRoom</dt>
+                                        <dd th:text="${Showroom.name}"></dd>
+                                    </div>
+                                    <br/>
+                                    <div class="infor-partner-item">
+                                        <dt>Số Điện Thoại</dt>
+                                        <dd th:text="${Showroom.phone}"></dd>
+
+                                    </div>
+                                    <br/>
+
+                                    <div class="infor-partner-item">
+                                        <dt>Địa Chỉ</dt>
+                                        <dd th:text="${Showroom.address}"></dd>
+                                    </div>
+                                </dl>
+                            </th:block>
+
+                            <th:block th:unless="${Showroom}">
+                                <p>Người bán này chưa đăng kí showroom</p>
+                            </th:block>
+                        </div>
+                    </div>
+                    </style>
+                    <div class="body-dow">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <a th:href="@{'/add-cart?id='+${Car.id}}" class="btn btn-success btn-lg">Quan Tâm</a>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div class="btn-group pull-right">
+                                    <th:block th:if="${Showroom}">
+                                        <a th:href="@{'/getShowroom?id='+${Car.userId}+'&name='+${Showroom.name} }">
+                                            <button class="btn btn-white btn-default"><i class="fa fa-star"></i>Đi đến
+                                                ShowRoom
+                                            </button>
+                                        </a>
+                                    </th:block>
+                                    <button class="btn btn-white btn-default"><i class="fa fa-envelope"></i>Liên
+                                        Hệ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end product -->
+    </div>
+
+</div>
+
+<div class="container" th:onload="AddActive()">
+    <h2>
+        Xe cùng hãng
+    </h2>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3  prodcut-item" th:each="item:${list}">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+                    <img th:src="${item.imagepath}" height="250px" width="220px" alt="">
+                    <div class="product-desc"><span class="product-price" th:text="${item.priceFrom}">
+							</span>
+                        <br>
+                        <small class="text-muted">Mercedes </small>
+                        <a href="#" class="product-name" th:text="${item.name}"></a>
+                    </div>
+                    <div class="m-t text-righ">
+                        <a th:href="@{'/detailCar?id='+${item.id}}" class="btn btn-xs btn-outline btn-primary">Xem thêm
+                            <i
+                                    class="fa fa-long-arrow-right"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--footer starts from here-->
+<div th:include="footer :: copy"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+
+</body>
+
+</html>

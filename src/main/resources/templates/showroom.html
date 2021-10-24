@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Website menu 06</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/header.css">
+  <!--	<link  th:href="@{/static/css/header.css}" type="stylesheet" />-->
+  <!--	<link th:src="@{/js/main.js}" rel="stylesheet"/>-->
+  <!--	<script src="../static/js/main.js" th:src="@{/js/main.js}">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+</head>
+
+<!--onload="loadData()"-->
+<body  th:onload="Active([[${active}]])">
+<style>
+.heyhey{
+margin-top: 600px;
+}
+
+
+</style>
+<div th:include="header :: copy"></div>
+
+
+<div class="container product-show" >
+  <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys" th:each="item:${list}">
+    <!-- product -->
+
+
+
+    <div class="product-content product-wrap clearfix">
+      <div class="row">
+        <div class="col-md-5 col-sm-12 col-xs-12">
+          <div class="product-image">
+            <img th:src="${item.logo}" style="height: 150px; width: 200px;" alt="250x250"
+                 class="img-responsive">
+          </div>
+        </div>
+        <div class="col-md-7 col-sm-12 col-xs-12">
+          <div class="product-deatil">
+            <h5 class="name">
+              <a href="#" th:text="${item.name}">
+
+              </a>
+            </h5>
+
+            <span class="tag1"></span>
+          </div>
+          <div class="description">
+            <p th:text="${item.address}"> </p>
+          </div>
+          <div class="product-info smart-form">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div><a class="btn btn-success"
+                        th:href="@{'/getShowroom?id='+${item.user_Id}+'&name='+${item.name} }">
+                  View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end product -->
+  </div>
+</div>
+
+
+<div th:include="footer :: copy"></div>
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

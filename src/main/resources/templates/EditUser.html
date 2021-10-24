@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!--  //<link rel="stylesheet" href="/css/style.css">-->
+</head>
+<body>
+<style>
+  .radio1{
+            margin-left: 30px;
+        }
+input {
+            border: none !important;
+            border-bottom: 1px solid black !important;
+        }
+</style>
+<form th:action="@{/edit}" th:object="${User}" method="post">
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="text-center">Sửa tài khoản</h2>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Họ và tên:</label>
+          <input required type="hidden"  class="form-control" th:field="*{id}">
+          <input required type="text" class="form-control" th:field="*{name}">
+        </div>
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="email"
+                 required="true"
+                 pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                 class="form-control"
+                 th:field="*{email}">
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại:</label>
+          <input required type="text" class="form-control" th:field="*{phone}"
+                 pattern="^(09|03|07|08|05)+([0-9]{8})$"
+                 title="vui lòng nhập đúng đầu số điện thoại, độ dài 10 số, không có chữ"
+          >
+        </div>
+        <div class="form-group">
+          <label>Thành phố hiện tại:</label>
+          <input required type="text" class="form-control" id="address" th:field="*{address}"
+          >
+
+        </div>
+        <div class="form-group">
+          <label>Bạn là:</label>
+          <input type="radio" class="radio1" value="2" checked="checked" th:field="*{roleId}"> Người mua
+          <input type="radio" class="radio1" value="3" th:field="*{roleId}"> Người bán
+        </div>
+        <div class="form-group">
+          <label>UserName:</label>
+          <input type="text" readonly class="form-control"  name="username" required th:field="${login.username}" >
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu Cũ:</label>
+          <input type="password" class="form-control" name="password" title="Mật khẩu chứa í nhất 8 kí tự, ít nhất 1 chữ in hoa, 1 chữ thường, 1 số">
+          <p th:text="${message}" style="color:red;"></p>
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu Mới:</label>
+          <input type="password" class="form-control" name="Newpassword"  required title="Mật khẩu chứa í nhất 8 kí tự, ít nhất 1 chữ in hoa, 1 chữ thường, 1 số">
+        </div>
+        <div class="form-group">
+          <label>Nhập lại mật khẩu mới</label>
+          <input type="password" class="form-control" name="Repassword" required title="Mật khẩu chứa í nhất 8 kí tự, ít nhất 1 chữ in hoa, 1 chữ thường, 1 số">
+          <p th:text="${messageError}" style="color:red;"></p>
+        </div>
+        <input type="submit" style="background-color: #56baed;" class="btn btn-primary" value="Sửa">
+        <input type="button" class="btn btn-danger" value="Hủy bỏ">
+      </div>
+    </div>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Website menu 06</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <!--	<link  th:href="@{/static/css/header.css}" type="stylesheet" />-->
+    <!--	<link th:src="@{/js/main.js}" rel="stylesheet"/>-->
+    <!--	<script src="../static/js/main.js" th:src="@{/js/main.js}">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<!--onload="loadData()"-->
+<body th:onload="Active([[${active}]])">
+<style>
+body{
+padding:0px;
+}
+
+
+
+
+
+</style>
+<div th:include="header :: copy"></div>
+
+
+<div th:include="search :: copy"></div>
+<hr>
+<div class="container">
+    <h2>
+        Danh sách hãng xe
+    </h2>
+
+</div>
+<div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row" id="logo">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 logo-company" th:each="item:${session.listCompany}">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-img-actions"><img th:src="${item.logo}" class="card-img img-fluid" width="100px"
+                                                       height="400px" alt=""></div>
+                </div>
+                <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2"><a href="#" class="text-default mb-2" data-abc="true"
+                                                                 th:text="${item.name_Company}"></a></h6>
+                    </div>
+                    <div><i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i></div>
+                    <div class="text-muted mb-3">34 reviews
+                    </div>
+                    <button type="button" class="btn bg-cart"><a
+                            th:href="@{'/getCompany?id='+${item.id}+'&name='+${item.name_Company}}"><i
+                            class="fa fa-cart-plus mr-2"></i>Xem Các Sản Phẩm</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container" th:if="${active==TRUE}">
+    <!--    th:if="${list.size>12}"-->
+    <div class="text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" th:href="@{'/page?pageNo=1&status='+${status}}">First</a>
+                </li>
+                <li class="page-item"><a class="page-link" th:if="${currentPage > 1}"
+                                         th:href="@{'/page?pageNo='+${currentPage-1}} +'&status='+ ${status}">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link"
+                                         th:href="@{'/page?pageNo='+${currentPage}} +'&status='+ ${status}">[[${currentPage}]]</a>
+                </li>
+                <li class="page-item"><a class="page-link" th:if="${currentPage <totalPages }"
+                                         th:href="@{'/page?pageNo='+${currentPage+1}} +'&status='+ ${status}">Next</a>
+                </li>
+                <li class="page-item"><a class="page-link"
+                                         th:href="@{'/page?pageNo='+${totalPages}} +'&status='+ ${status}">Last</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<br>
+<hr>
+<br>
+<!--footer starts from here-->
+<div th:include="footer :: copy"></div>
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

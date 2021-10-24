@@ -1,0 +1,144 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Website menu 06</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+			shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <!--	<link  th:href="@{/static/css/header.css}" type="stylesheet" />-->
+    <!--	<link th:src="@{/js/main.js}" rel="stylesheet"/>-->
+    <!--	<script src="../static/js/main.js" th:src="@{/js/main.js}">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div class="elfsight-app-004b914e-a65a-41e2-ba47-bbd212fa3606"></div>
+</head>
+
+<!--onload="loadData()"-->
+<body th:onload="Active([[${active}]])">
+<style>
+body{
+padding:0px;
+}
+</style>
+<div th:include="header :: copy"></div>
+
+
+<div th:include="search :: copy"></div>
+<hr>
+<div class="title">
+    <h2 th:Text="${title}"></h2>
+    <div class="product-soft d-none d-lg-block col-lg-6 text-lg-right">
+			<span class="product-soft-span position-relative">
+				<select class="product-soft-select pointer" onchange="location=
+							this.value">
+					<option value="">
+						Sản phẩm nổi bật</option>
+					<option value="" selected="">
+						Giá: Tăng dần</option>
+					<option value="">
+						Giá: Giảm dần</option>
+					<option value="">
+						Tên: A - Z</option>
+					<option value="/ao-nam-pc94119.html?show=nameDesc">
+						Tên: Z - A</option>
+					<option value="/ao-nam-pc94119.html?show=idAsc">
+						Cũ nhất</option>
+					<option value="/ao-nam-pc94119.html?show=idDesc">
+						Mới nhất</option>
+					<option value="/ao-nam-pc94119.html?show=bestseller">
+						Bán chạy nhất</option>
+				</select><i class="fa fa-angle-double-down"></i>
+			</span>
+    </div>
+</div>
+<div class="container">
+    <div class="row" id="contain">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3  prodcut-item" th:each="item:${list}">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+                    <img th:src="${item.imagepath}" height="250px" width="220px" alt="">
+                    <div class="product-desc"><span class="product-price" th:text="${item.priceFrom}">
+							</span>
+                        <br>
+                        <small class="text-muted">Mercedes </small>
+                        <a href="#" class="product-name" th:text="${item.name}"></a>
+                        <div class="small m-t-xs" th:text="${item.information}">
+                        </div>
+                        <div class="m-t text-righ">
+                            <a th:href="@{'/detailCar?id='+${item.id}}" class="btn btn-xs btn-outline btn-primary">Xem
+                                thêm <i class="fa fa-long-arrow-right"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" th:if="${activePage==TRUE}" >
+<!--    th:if="${list.size>12}"-->
+    <div class="text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link"th:href="@{'/page?pageNo=1&status='+${status}}">First</a></li>
+                <li class="page-item"><a class="page-link"th:if="${currentPage > 1}" th:href="@{'/page?pageNo='+${currentPage-1}} +'&status='+ ${status}">Previous</a></li>
+                <li class="page-item"><a class="page-link" th:href="@{'/page?pageNo='+${currentPage}} +'&status='+ ${status}">[[${currentPage}]]</a></li>
+                <li class="page-item"><a class="page-link" th:if="${currentPage <totalPages }" th:href="@{'/page?pageNo='+${currentPage+1}} +'&status='+ ${status}">Next</a></li>
+                <li class="page-item"><a class="page-link"th:href="@{'/page?pageNo='+${totalPages}} +'&status='+ ${status}">Last</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+    <div class="container">
+        <h2>
+            Thương hiệu
+        </h2>
+
+    </div>
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+        <div class="row" id="logo">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 logo-company" th:each="item:${listTop5}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-img-actions"><img th:src="${item.logo}" class="card-img img-fluid" width="100px"
+                                                           height="400px" alt=""></div>
+                    </div>
+                    <div class="card-body bg-light text-center">
+                        <div class="mb-2">
+                            <h6 class="font-weight-semibold mb-2"><a href="#" class="text-default mb-2" data-abc="true"
+                                                                     th:text="${item.name_Company}"></a></h6>
+                        </div>
+                        <div><i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i>
+                            <i class="fa fa-star star"></i></div>
+                        <div class="text-muted mb-3">34 reviews
+                        </div>
+                        <button type="button" class="btn bg-cart"><a
+                                th:href="@{'/getCompany?id='+${item.id}+'&name='+${item.name_Company}}"><i
+                                class="fa fa-cart-plus mr-2"></i>Xem Các Sản Phẩm</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <hr>
+    <br>
+
+
+    <!--footer starts from here-->
+    <div th:include="footer :: copy"></div>
+
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>

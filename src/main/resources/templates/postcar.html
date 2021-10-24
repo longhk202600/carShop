@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Post Car</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        #dislayImg{
+            margin-top: 30px;
+            margin-left: 30px;
+        }
+        #displayImg img  {
+            height: 90px;
+            width: 125px;
+            margin-top: 30px;
+            margin-right: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body th:onload="Active([[${active}]])">
+<div th:include="header :: copy"></div>
+
+<form th:action="@{/save-car}" th:object="${car}" method="post" enctype="multipart/form-data">
+<div class="container" style="background-color: white;" >
+    <div style=" border-radius: 10px; background-color: white;" class="row">
+        <div class="col-sm-4" style="padding-bottom: 10px;">
+            <div style="margin-top: 10px; " class="khoi">
+                <label>Chọn ảnh nổi bật</label>
+                <input class="form-control-file border" type="file" name="imageCar" id="imageCar" required
+                       accept="image/png, image/jpg, image/jpeg">
+            </div>
+            <img src="/image/labo31.jpg" alt="anh xe" height="300px" width="350px" style="margin-top: 10px;"
+                 id="image">
+        </div>
+        <div class="col-sm-8">
+            <div style="margin-top: 10px;" class="khoi">
+                <label>Chọn ảnh thêm ảnh của xe</label>
+                <input id="moreCarImage" class="form-control-file border" type="file" multiple="true"
+                       name="moreImageCar" required
+                       accept="image/png, image/jpg, image/jpeg">
+            </div>
+            <div class="khoi " id="displayImg">
+
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 10px;  background-color: white; border-radius: 10px;" class="row">
+        <div class="col-sm-12" >
+            <label style="margin-top:10px; font-weight: bold;">Thông tin xe</label>
+            <div class="form-row" style="margin-bottom: 15px;" >
+                <div class="col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Nhập tên xe</span>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" required="true" th:field="*{name}">
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom: 15px;" >
+                <div class="col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Hãng xe</span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" th:field="*{companyId}">
+                        <option th:each="company : ${CompanyList}"
+                                th:value="${company.id}"
+                                th:utext="${company.name_Company}"/>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom: 15px;" >
+                <div class="col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Dòng xe</span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" th:field="*{type}">
+                        <option value="Sedan" selected="true">Sedan</option>
+                        <option value="HatchBack">HatchBack</option>
+                        <option value="SUV">SUV – xe thể thao đa dụng</option>
+                        <option value="Crossover">Crossover (CUV)</option>
+                        <option value="MPV">MPV / Minivan – xe đa dụng</option>
+                        <option value="Coupe">Coupe – xe thể thao</option>
+                        <option value="Convertible">Convertible / Cabriolet – xe mui trần</option>
+                        <option value="Pickup">Pickup – xe bán tải</option>
+                        <option value="Limousine">Limousine</option>
+                        <option value="Xe tải">Xe tải</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom: 15px;" >
+                <div class="col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Màu sắc</span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" th:field="*{color}">
+                        <option value="Trắng" selected="true">Trắng</option>
+                        <option value="Đen">Đen</option>
+                        <option value="Đỏ">Đỏ</option>
+                        <option value="Xám">Xám</option>
+                        <option value="Xanh nước biển">Xanh nước biển</option>
+                        <option value="Bạc">Bạc</option>
+                        <option value="Nâu">Nâu</option>
+                        <option value="Vàng">Vàng</option>
+                        <option value="Da cam">Da cam</option>
+                        <option value="Đồng">Đồng</option>
+                        <option value="Xanh lá cây">Xanh lá cây</option>
+                        <option value="Tím">Tím</option>
+                        <option value="Hồng">Hồng</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom: 15px;" >
+                <div class="col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Giá tiền</span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <input type="number" th:onchange="FormatMoney(TRUE)" class="form-control" id="priceFrom"
+                           th:field="*{priceFrom}" placeholder="từ"
+                           required="true">
+                </div>
+                <div class="col-sm-1" id="moneyFrom" style="margin-top:8px;">
+                    Triệu
+                </div>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" id="priceTo"
+                           th:field="*{priceTo}" placeholder="đến"
+                           required="true">
+                </div>
+                <div class="col-sm-1" id="moneyTo" style="margin-top:8px;">
+                   Triệu
+                </div>
+                <div class="col-sm-2">
+                    <p id="error" style="color: red;"></p>
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom: 15px;" >
+                <div class="col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Số chỗ ngồi</span>
+                    </div>
+                </div>
+                <div class="col-sm-2" >
+                    <select class="form-control" th:field="*{seats}">
+                        <option value="2" selected="true">2</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="7">7</option>
+                        <option value="12">12</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom: 15px;" >
+                <div class="col-sm-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Tình trạng</span>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control" th:field="*{usage}">
+                        <option value="TRUE" selected="true">Mới</option>
+                        <option value="FALSE">Cũ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comment">Thông tin chi tiết</label>
+                <textarea class="form-control" rows="9" id="comment" th:field="*{information}"></textarea>
+            </div>
+            <div class="form-row" style="padding-bottom: 15px;">
+                <div class="col-sm-10">
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-danger" th:href="@{/home} ">Hủy bỏ</a>
+                    <input type="submit" class="btn btn-primary" value="Thêm">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+<hr>
+<div th:include="footer :: copy"></div>
+<script>
+    // hien thi 1 anh
+    document.getElementById("imageCar").onchange = function () {
+        var fsize = $('#imageCar')[0].files[0].size;
+        // dung luong lon qua 1MB
+        if(fsize > 1048576){
+            alert("Dung lượng file quá lớn. Vui lòng chọn ảnh khác");
+            document.getElementById('imageCar').value = "";
+        }else{
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("image").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+        }
+    };
+
+    // kiem tra so luong anh va hien thi list anh
+    $('input#moreCarImage').change(function(){
+    var files = $(this)[0].files;
+    var values =  $('input#moreCarImage');
+    var fileSelected = document.getElementById('moreCarImage').files;
+    var sizeFile = 0;
+    for(var i = 0;i<fileSelected.length;i++){
+        sizeFile += fileSelected[i].size;
+    }
+    // kiểm tra dung lượng file va so luong file
+    if(files.length != 5 || sizeFile > 1048576){
+        alert("Vui lòng chọn đủ 5 file hoặc dung lượng file quá lớn");
+        var input = $("#moreCarImage");
+        input.replaceWith(input.val('').clone(true));
+    }else{
+        var fileSelected = document.getElementById('moreCarImage').files;
+        if(fileSelected.length > 0){
+            for(var i = 0;i<fileSelected.length;i++){
+                var fileToLoad = fileSelected[i];
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoaderEvent){
+                    var srcData = fileLoaderEvent.target.result;
+                    var newImage = document.createElement('img');
+                    newImage.src = srcData;
+                    document.getElementById('displayImg').innerHTML +=newImage.outerHTML;
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
+    }
+});
+//kiem tra giá tiền
+    document.getElementById("priceFrom").oninput = function () {
+        var numberPriceFrom = document.getElementById("priceFrom").value;
+        var numberPriceTo = document.getElementById("priceTo").value;
+        var error = document.getElementById("error");
+        if(numberPriceFrom.length>=4){
+        var newPrice =numberPriceFrom.substring(numberPriceFrom.length-3,0)+" tỷ "+numberPriceFrom.substring(numberPriceFrom.length,numberPriceFrom.length-3)+"Triệu"
+          document.getElementById("moneyFrom").innerHTML = newPrice;
+        }else{
+          document.getElementById("moneyFrom").innerHTML = numberPriceFrom+"Triệu";
+        }
+    }
+
+    document.getElementById("priceTo").oninput = function () {
+        var numberPriceFrom = document.getElementById("priceFrom").value;
+        var numberPriceTo = document.getElementById("priceTo").value;
+        var error = document.getElementById("error");
+         if(numberPriceTo.length>=4){
+           var newPrice =numberPriceTo.substring(numberPriceTo.length-3,0)+" tỷ "+numberPriceTo.substring(numberPriceTo.length,numberPriceTo.length-3)+"Triệu"
+           document.getElementById("moneyTo").innerHTML = newPrice
+        }else{
+          document.getElementById("moneyTo").innerHTML = numberPriceTo+"Triệu";
+        }
+
+        if(numberPriceFrom >= numberPriceTo){
+            error.innerHTML = '(Giá tiền không hợp lệ)';
+        }else{
+        error.style.color = 'blue';
+        error.innerHTML = '(Giá tiền hợp lệ)';
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/header.css">
+</header>
+<body>
+<style>
+.justify-content-between{
+    height:50px;
+}
+
+</style>
+<div th:fragment="copy">
+    <section class="ftco-section">
+        <div class="wrap">
+            <div class="container">
+                <div class="row justify-content-between" style="height:50px">
+                    <div class="col">
+                        <p class="mb-0 phone"><span class="fa fa-phone"></span> <a href="#">+00
+                            1234 567</a></p>
+                    </div>
+                    <div class="col">
+                        <h3 sec:authorize="isAuthenticated()">Wellcome, <span sec:authentication="name"></span></h3>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <div class="social-media">
+                            <p class="mb-0 d-flex">
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span
+                                        class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                                <a th:href="@{'/profile'}" class="d-flex align-items-center justify-content-center"><span
+                                        class="fa fa-user-circle"><i class="sr-only">Profile</i></span></a>
+
+                                <a th:href="@{'/add-cart'}" class="d-flex align-items-center justify-content-center"><span
+                                        class="fa fa-shopping-cart"><i class="sr-only">Dribbble</i></span></a>
+                                <a th:href="@{'/login'}" sec:authorize="isAnonymous()" class="d-flex align-items-center justify-content-center"><span
+                                        class="fa fa-sign-in" aria-hidden="true"><i class="sr-only"></i></span></a>
+                                <a   th:href="@{/logout}" sec:authorize="isAuthenticated()" class="d-flex align-items-center justify-content-center"><span
+                                        class="fa fa-sign-out"><i class="sr-only"></i></span></a>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark
+				ftco-navbar-light" id="ftco-navbar">
+            <div class="container-fluid"  th:switch="${session.role}">
+                <div class="logo">
+                    <a class="navbar-brand" th:href="@{'/home'}"><img src="/image/logo-removebg.png" alt=""></a>
+                    <div class="title-header">
+                        <h3>SUPPER CAR MARKET</h3>
+                    </div>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle
+						navigation">
+                    <span class="fa fa-bars"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" th:case="'PARTNER'">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item "><a th:href="@{'/home'}" class="nav-link">Home</a></li>
+                        </li>
+                        <li class="nav-item"><a th:href="@{'/listPostOrder'}" class="nav-link">Danh Sách Tìm Xe</a></li>
+                        <li class="nav-item"><a  th:href="@{'/post-car'}" class="nav-link">Đăng Bán Xe</a></li>
+                        <li class="nav-item"><a  th:href="@{'/post-order'}" class="nav-link">Bài đăng tìm xe</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">My Show room </a></li>
+                        <li class="nav-item"><a  th:href="@{'/page?pageNo=1&status=TRUE'}" class="nav-link">Xe Mới</a></li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="ftco-nav" th:case="'ADMIN'">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item "><a th:href="@{'/home'}" class="nav-link">Quản lí</a></li>
+                        </li>
+                        <li class="nav-item"><a  th:href="@{'/incomeWebsite'}" class="nav-link">Doanh Thu</a></li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" th:case="*">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item "><a th:href="@{'/home'}" class="nav-link">Home</a></li>
+                        </li>
+                        <li class="nav-item"><a  th:href="@{'/page?pageNo=1&status=TRUE'}" class="nav-link">Xe Mới</a></li>
+                        <li class="nav-item"><a th:href="@{'/page?pageNo=1&status=FALSE'}" class="nav-link">Xe đã qua sử dụng</a></li>
+                        <li class="nav-item"><a  th:href="@{'/post-order'}" class="nav-link">Đâng Tìm Xe</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" th:href="@{'/list-company'}">Hãng Xe </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" th:each="item:${session.listCompany}"
+                                   th:href="@{'/getCompany?id='+${item.id}+'&name='+${item.name_Company}}" th:text="${item.name_Company}"> </a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a th:href="@{'/showRoom'}" class="nav-link">Danh Sách Showroom</a></li>
+                        <li class="nav-item"><a th:href="@{'/login'}" class="nav-link">Đăng Nhập</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </section>
+</div>
+
+
+<script src="js/main.js"></script>
+</body>
+
+</html>
